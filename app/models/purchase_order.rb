@@ -5,7 +5,7 @@ class PurchaseOrder < ApplicationRecord
   enum state: %i(requested processing completed)
 
   def items_total
-    purchase_items.inject(0){ |sum, item| sum += item.price * item.quantity }
+    purchase_order_items.inject(0){ |sum, item| sum += item.price * item.quantity }
   end
 
   def total
