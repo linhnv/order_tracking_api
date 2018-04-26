@@ -4,8 +4,8 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.references :customer, foreign_key: true
       t.string :shipping_address
       t.text :notes
-      t.decimal :shiment_total
-      t.decimal :adjustment_total
+      t.decimal :shipment_total, default: 0
+      t.decimal :adjustment_total, default: 0
 
       t.timestamps
     end

@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2018_04_26_173601) do
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "product_id"
-    t.decimal "price"
-    t.integer "quantity"
+    t.decimal "price", default: "0.0"
+    t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2018_04_26_173601) do
     t.integer "customer_id"
     t.string "shipping_address"
     t.text "notes"
-    t.decimal "shiment_total"
-    t.decimal "adjustment_total"
+    t.decimal "shipment_total", default: "0.0"
+    t.decimal "adjustment_total", default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "state", default: 0
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2018_04_26_173601) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "unit"
-    t.decimal "price"
+    t.decimal "price", default: "0.0"
     t.text "description"
     t.string "external_urls"
-    t.integer "count"
+    t.integer "count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
