@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_26_175739) do
+ActiveRecord::Schema.define(version: 2018_04_26_180031) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2018_04_26_175739) do
     t.integer "count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "purchase_order_items", force: :cascade do |t|
+    t.integer "purchase_order_id"
+    t.integer "product_id"
+    t.decimal "price", default: "0.0"
+    t.integer "quantity", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_purchase_order_items_on_product_id"
+    t.index ["purchase_order_id"], name: "index_purchase_order_items_on_purchase_order_id"
   end
 
   create_table "purchase_orders", force: :cascade do |t|
