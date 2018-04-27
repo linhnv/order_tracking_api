@@ -20,7 +20,7 @@ class SuppliersController < ApplicationController
     if @supplier.save
       render json: @supplier, status: :created, location: @supplier
     else
-      render json: @supplier.errors, status: :unprocessable_entity
+      render json: @supplier.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class SuppliersController < ApplicationController
     if @supplier.update(supplier_params)
       render json: @supplier
     else
-      render json: @supplier.errors, status: :unprocessable_entity
+      render json: @supplier.errors.full_messages, status: :unprocessable_entity
     end
   end
 

@@ -20,7 +20,7 @@ class PurchaseOrdersController < ApplicationController
     if @purchase_order.save
       render json: @purchase_order, status: :created, location: @purchase_order
     else
-      render json: @purchase_order.errors, status: :unprocessable_entity
+      render json: @purchase_order.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class PurchaseOrdersController < ApplicationController
     if @purchase_order.update(purchase_order_params)
       render json: @purchase_order
     else
-      render json: @purchase_order.errors, status: :unprocessable_entity
+      render json: @purchase_order.errors.full_messages, status: :unprocessable_entity
     end
   end
 
