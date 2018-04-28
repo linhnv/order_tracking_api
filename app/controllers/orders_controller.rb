@@ -46,6 +46,9 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:customer_id, :shipping_address, :notes, :shipment_total, :adjustment_total)
+      params.require(:order).permit(
+        :customer_id, :shipping_address, :notes, :shipment_total, :adjustment_total,
+        order_items_attributes: [:order_id, :product_id, :price, :quantity]
+      )
     end
 end
