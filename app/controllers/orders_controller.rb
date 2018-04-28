@@ -3,9 +3,9 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.all.includes(:order_items, :customer)
 
-    render json: @orders
+    render json: @orders.to_json(include: [:customer, :order_items], methods: [:total])
   end
 
   # GET /orders/1
