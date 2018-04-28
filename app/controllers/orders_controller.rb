@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    render json: @order
+    render json: @order.to_json(include: [:customer, :order_items], methods: [:total])
   end
 
   # POST /orders
@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
         :customer_id, :shipping_address, :notes, :shipment_total, :adjustment_total,
-        order_items_attributes: [:order_id, :product_id, :price, :quantity]
+        order_items_attributes: [:id, :order_id, :product_id, :price, :quantity]
       )
     end
 end
