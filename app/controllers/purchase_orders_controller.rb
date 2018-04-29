@@ -3,14 +3,14 @@ class PurchaseOrdersController < ApplicationController
 
   # GET /purchase_orders
   def index
-    @purchase_orders = PurchaseOrder.all
+    @purchase_orders = PurchaseOrder.all.includes(:purchase_order_items, :supplier)
 
-    render json: @purchase_orders
+    render json: @purchase_orders.to_json(include: [:supplier, :purchase_order_items], methods: [:total])
   end
 
   # GET /purchase_orders/1
   def show
-    render json: @purchase_order
+    render json: @purchase_order.to_json(include: [:supplier, :purchase_order_items], methods: [:total])
   end
 
   # POST /purchase_orders
@@ -46,6 +46,8 @@ class PurchaseOrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def purchase_order_params
-      params.require(:purchase_order).permit(:supplier_id, :notes, :shipment_total, :adjustment_total, :state)
+      params.require(:purchase_order).permit(:supplier_id, :notes, :shipment_total, :adjustment_total, :state,
+        purchase_order_items_attributes: [:id, :purchase_order_id, :product_id, :price, :quantity, :_destroy]
+      )
     end
 end
