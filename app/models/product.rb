@@ -14,7 +14,11 @@ class Product < ApplicationRecord
     imported_count - sold_count
   end
 
+  def forecast_remaning
+    purchase_order_items.sum(:quantity) - order_items.sum(:quantity)
+  end
+
   def reset_count
-    update(count: remaining)
+    update(count: remaining, forecast_count: forecast_remaning)
   end
 end
