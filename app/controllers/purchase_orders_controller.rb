@@ -35,7 +35,7 @@ class PurchaseOrdersController < ApplicationController
 
   # DELETE /purchase_orders/1
   def destroy
-    @purchase_order.destroy
+    DeleteOrderService.new(@purchase_order).perform
   end
 
   private
