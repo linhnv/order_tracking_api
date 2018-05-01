@@ -10,16 +10,17 @@ class PurchaseOrder < ApplicationRecord
   accepts_nested_attributes_for :purchase_order_items, allow_destroy: true
 
   after_save :recalculate_products_count
+  before_save :reset_total
 
   def items_total
     purchase_order_items.inject(0){ |sum, item| sum += item.price * item.quantity }
   end
 
-  def total
-    shipment_total + adjustment_total + items_total
-  end
-
   private
+
+  def reset_total
+    self.total = shipment_total + adjustment_total + items_total
+  end
 
   def recalculate_products_count
     products.each(&:reset_count)

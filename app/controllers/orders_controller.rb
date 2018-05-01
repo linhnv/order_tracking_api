@@ -5,12 +5,12 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all.includes(:order_items, :customer)
 
-    render json: @orders.to_json(include: [:customer, :order_items], methods: [:total])
+    render json: @orders.to_json(include: [:customer, :order_items])
   end
 
   # GET /orders/1
   def show
-    render json: @order.to_json(include: [:customer, :order_items], methods: [:total])
+    render json: @order.to_json(include: [:customer, :order_items])
   end
 
   # POST /orders

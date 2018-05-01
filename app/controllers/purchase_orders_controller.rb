@@ -5,12 +5,12 @@ class PurchaseOrdersController < ApplicationController
   def index
     @purchase_orders = PurchaseOrder.all.includes(:purchase_order_items, :supplier)
 
-    render json: @purchase_orders.to_json(include: [:supplier, :purchase_order_items], methods: [:total])
+    render json: @purchase_orders.to_json(include: [:supplier, :purchase_order_items])
   end
 
   # GET /purchase_orders/1
   def show
-    render json: @purchase_order.to_json(include: [:supplier, :purchase_order_items], methods: [:total])
+    render json: @purchase_order.to_json(include: [:supplier, :purchase_order_items])
   end
 
   # POST /purchase_orders
